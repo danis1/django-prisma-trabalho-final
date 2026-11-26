@@ -1,0 +1,33 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Meus Pedidos{%endblock%}
+
+{% block conteudo %}
+
+    <div class="area-botao">
+        <h2>Meus Pedidos</h2>
+        <a href="{% url 'produtos' %}" class="botao">Continuar comprando</a>
+    </div>
+
+    {% for produto in produtos %}
+        <div class="pedido">
+            {% if produto.servico.imagem %}
+                <img src="{{ produto.servico.imagem.url }}" alt="{{ produto.servico.nome }}">
+            {% endif %}
+            <div class="pedido-info">
+                <h4>{{ produto.servico.nome }}</h4>
+                <p>{{ produto.servico.descricao }}</p>
+                <p>Comprado em: {{ produto.data }}</p>
+            </div>
+            <p class="pedido-preco">R$ {{ produto.servico.preco }}</p>
+        </div>
+    {% empty %}
+        <p>Nenhum pedido ainda.</p>
+    {% endfor %}
+
+    <div class="total-pedidos">
+        <span>Total das compras</span>
+        <span>R$ {{ total }}</span>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+
+{% extends 'template.html' %}
+
+{% block titulo %}Gráficos{% endblock %}
+
+{% block conteudo %}
+
+<span class="etiqueta">Análise de dados</span>
+<h2>Relatórios de Serviços</h2>
+<p class="subtitulo">Acompanhe os dados e a situação dos serviços cadastrados na plataforma.</p>
+
+<div class="indicadores grade-cards">
+    <div class="card">Cadastrados<h3>{{ servicos_total }}</h3></div>
+    <div class="card">Disponíveis<h3>{{ servicos_ativos }}</h3></div>
+    <div class="card">Indisponíveis<h3>{{ servicos_inativos }}</h3></div>
+</div>
+
+<div class="indicadores grade-cards">
+    <div class="card">
+        <h4>Serviços por categoria</h4>
+        <div class="grafico"><canvas id="graficoCategorias"></canvas></div>
+    </div>
+    <div class="card">
+        <h4>Situação dos serviços</h4>
+        <div class="grafico"><canvas id="graficoStatus"></canvas></div>
+    </div>
+</div>
+
+{{ categorias_labels|json_script:"categorias" }}
+{{ categorias_valores|json_script:"quantidades" }}
+{{ servicos_ativos|json_script:"ativos" }}
+{{ servicos_inativos|json_script:"inativos" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const categorias = JSON.parse(
+        document.getElementById('categorias').textContent
+    );
+
+    const quantidades = JSON.parse(
+        document.getElementById('quantidades').textContent
+    );
+
+    // Gráfico de serviços por categoria
+    new Chart(document.getElementById('graficoCategorias'), {
+        type: 'bar',
+        data: {
+            labels: categorias,
+            datasets: [{
+                label: 'Serviços por Categoria',
+                data: quantidades,
+                backgroundColor: '#3BC1F3'
+            }]
+        }
+    });
+
+    // Gráfico de serviços ativos e inativos
+    new Chart(document.getElementById('graficoStatus'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Ativos', 'Inativos'],
+            datasets: [{
+                data: [
+                    JSON.parse(document.getElementById('ativos').textContent),
+                    JSON.parse(document.getElementById('inativos').textContent)
+                ],
+                backgroundColor: [
+                    '#43B6B1',
+                    '#F98A31'
+                ]
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

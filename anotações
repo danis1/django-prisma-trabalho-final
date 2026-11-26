@@ -1,0 +1,11 @@
+#criar pagina quem somos com cards que usa os integrande que foram cadastrados no banco supabase ,banco de dados remoro
+#produtos do banco - adicionar botão comprar com produtos da api
+#contato- ja tem- quando logar ve as mensagem- somente envio mensagem de contato
+#logun - implementar esquecer a senha (colocar se não tiver)
+#cadastro - ja tem - tem 2 usuarios admin e o usuario comum -pronto
+#dashboard- so pode ver quem estiver logado - tudo que foi feito vai ter que estar no dashboard - editar perfil (pode alterar dados)-contatos (nao precisa estar logado, na dashboard aparece a msg por quem foi enviado, ja tem) - serviços (ja tem- lista de servicos cadastrados com os filtros) -add novo servico e editar ou excluir -
+#equipe - gerenciar integrantes - adicionar o editar - excluir ja tem
+#relatório de serviços
+#meus pedidos - não pode comprar sem estar logados- mostra de ql usuario - criar model de pedido com 2 chaves estrangeiras para relacios com o servico selecionado e guardar no banco - quando na pag de pedido ele mostra os comprados
+#relatorios
+

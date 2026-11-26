@@ -1,0 +1,39 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Equipe{% endblock %}
+
+{% block conteudo %}
+
+<div class="area-botao">
+    <h2>Gerenciar Integrantes</h2>
+    <a href="{% url 'addIntegrante' %}" class="botao-add">+ Adicionar integrante</a>
+</div>
+
+<div class="grade-cards">
+{% for integrante in integrantes %}
+    <div class="card card-foto">
+        {% if integrante.foto_url %}
+            <img src="{{ integrante.foto_url }}" alt="{{ integrante.nome }}">
+        {% endif %}
+
+        <h4>{{ integrante.nome }}</h4>
+        <p><b>{{ integrante.cargo }}</b></p>
+        <p>{{ integrante.biografia }}</p>
+
+        <div class="card-acoes">
+            <a href="{% url 'editIntegrante' integrante.id %}" class="botao-editar">Editar</a>
+
+            <form method="POST"
+                  action="{% url 'delIntegrante' integrante.id %}"
+                  onsubmit="return confirm('Deseja realmente excluir?')">
+                {% csrf_token %}
+                <input type="submit" value="Excluir">
+            </form>
+        </div>
+    </div>
+{% empty %}
+    <p>Nenhum integrante cadastrado</p>
+{% endfor %}
+</div>
+
+{% endblock %}

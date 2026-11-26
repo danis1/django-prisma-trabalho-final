@@ -1,0 +1,19 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Dashboard{% endblock %}
+
+{% block conteudo %}
+<span class="etiqueta">Painel do usuário</span>
+<h2>Olá, {{ user.first_name|default:user.username }}!</h2>
+<p class="subtitulo">Bem-vindo ao seu painel de controle. Escolha uma das opções abaixo para continuar.</p>
+
+<h3>Meu espaço</h3>
+<div class="grade-cards">
+    <div class="card"><h4>Editar Perfil</h4><p>Consultar e atualizar dados</p><a href="{% url 'perfil' %}">Acessar perfil</a></div>
+    <div class="card"><h4>Contatos</h4><p>Gerenciar contatos</p><a href="{% url 'contato' %}">Gerenciar contatos</a></div>
+    <div class="card"><h4>Serviços</h4><p>Cadastrar, editar ou deletar serviços</p><a href="{% url 'servicos' %}">Gerenciar serviços</a></div>
+    <div class="card"><h4>Equipe</h4><p>Gerenciar Equipe</p><a href="{% url 'integrantes' %}">Gerenciar equipe</a></div>
+    <div class="card"><h4>Meus Pedidos</h4><p>Consultar pedidos</p><a href="{% url 'carrinho' %}">Visualizar pedidos</a></div>
+    <div class="card"><h4>Relatórios</h4><p>Visualização de dados</p><a href="{% url 'relatorios' %}">Acessar relatórios</a></div>
+</div>
+{% endblock %}

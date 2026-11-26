@@ -1,0 +1,55 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Produtos e Serviços{%endblock%}
+
+{% block conteudo %}
+
+<span class="etiqueta">Nosso catálogo</span>
+<h2>Serviços da Nossa Loja</h2>
+<p class="subtitulo">Produtos e serviços oferecidos diretamente pela PRISMA.</p>
+
+{% if user.is_authenticated %}
+    <p class="subtitulo"><a href="{% url 'carrinho' %}" class="botao">Carrinho</a></p>
+{% endif %}
+
+<div class="grade-cards grade-produtos">
+{% for servico in servicos %}
+    <div class="card">
+        {% if servico.imagem %}
+            <img src="{{ servico.imagem.url }}" alt="{{ servico.nome }}">
+        {% endif %}
+        <h4>{{ servico.nome }}</h4>
+        <p>{{ servico.descricao }}</p>
+        <p class="card-preco">R$ {{ servico.preco }}</p>
+
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'comprar' servico.id %}">
+                {% csrf_token %}
+                <button type="submit">Comprar</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="botao">Entre para comprar</a>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>Nenhum serviço disponível.</p>
+{% endfor %}
+</div>
+
+<h2>Produtos das Lojas Parceiras</h2>
+<p class="subtitulo">Produtos disponíveis em nossa vitrine parceira.</p>
+
+<div class="grade-cards grade-produtos">
+{% for produto in produtos_api|slice:":12" %}
+    <div class="card">
+        <img src="{{ produto.image }}" alt="{{ produto.title }}">
+        <h4>{{ produto.title|truncatechars:40 }}</h4>
+        <p>{{ produto.description|truncatechars:80 }}</p>
+        <p class="card-preco">R$ 50,00</p>
+    </div>
+{% empty %}
+    <p>Não foi possível carregar os produtos parceiros.</p>
+{% endfor %}
+</div>
+
+{% endblock %}

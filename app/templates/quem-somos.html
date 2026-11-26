@@ -1,0 +1,24 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Quem Somos{% endblock %}
+
+{% block conteudo %}
+<span class="etiqueta">Nossa equipe</span>
+<h2>Quem Somos</h2>
+<p class="subtitulo">Somos uma gráfica online dedicada a fornecer soluções de impressão de alta qualidade para clientes de qualquer lugar do Brasil.</p>
+
+<div class="grade-cards">
+{% for integrante in integrantes %}
+    <div class="card card-foto">
+        {% if integrante.foto_url %}
+            <img src="{{ integrante.foto_url }}" alt="{{ integrante.nome }}">
+        {% endif %}
+        <h3>{{ integrante.nome }}</h3>
+        <p><b>{{ integrante.cargo }}</b></p>
+        <p>{{ integrante.biografia }}</p>
+    </div>
+{% empty %}
+    <p>Nenhum integrante cadastrado.</p>
+{% endfor %}
+</div>
+{% endblock %}

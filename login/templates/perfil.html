@@ -1,0 +1,37 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Meu Perfil{%endblock%}
+
+{% block conteudo %}
+<h2>Perfil</h2>
+
+ <p>Olá, {{user.username}}</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label>Nome:</label>
+    <input type="text" name="nome" value="{{user.first_name}}">
+    <br><br>
+    
+    
+    <label>Sobrenome:</label>
+    <input type="text" name="sobrenome" value="{{user.last_name}}">
+    <br><br>
+
+    
+    <label>Email:</label>
+    <input type="email" name="email" value="{{user.email}}">
+    <br><br>
+
+
+    <input type="submit" value="Salvar alterações">
+</form>
+
+
+<hr>
+<p><a href = "{% url 'alterar_senha' %}"> Alterar Senha<p>
+
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Equipe{% endblock %}
+
+{% block conteudo %}
+
+
+<form method="POST" action="{% url 'editIntegrante' integrante.id %}">
+{% csrf_token %}
+
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" id="nome" value="{{ integrante.nome }}" required><br>
+
+    <label for="cargo">Descrição:</label>
+    <input type="text" name="cargo" id="cargo" value="{{ integrante.cargo }}" required><br>
+
+    <label for="biografia">Biografia:</label>
+    <textarea  name="biografia" id="biografia" required>{{ integrante.biografia }}</textarea><br>
+
+    <label for="foto">Foto(url):</label>
+    <input type="url" name="url" id="foto" value="{{ integrante.foto_url }}" required><br>
+
+    <img src="{{ integrante.foto_url }}" width="200"><br>
+
+    <button type="submit">Salvar alterações</button>
+
+</form>
+
+{% endblock %}

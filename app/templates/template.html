@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block titulo %}{% endblock %} | PRISMA</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'index' %}"
+            id="titulo-site">PRISMA</a></h1>
+        <nav>
+            <a class="item-menu" href="{% url 'quemSomos' %}">Quem somos</a>
+            <a class="item-menu" href="{% url 'produtos' %}">Produtos</a>
+            <a class="item-menu" href="{% url 'addContato' %}">Contato</a>
+            {% if user.is_authenticated %}
+                <a class="item-menu" href="{% url 'dashboard' %}">Dashboard</a>
+                <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="item-menu botao-gradiente">Sair</button>
+                </form>
+            {% else %}
+                <a class="item-menu botao-gradiente" href="{% url 'login' %}">Entrar</a>
+            {% endif %}         
+        </nav>
+    </header>
+
+    <main>
+        {% block conteudo %}
+        {% endblock %}
+    </main>
+</body>
+</html>

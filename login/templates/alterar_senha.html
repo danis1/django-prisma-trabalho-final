@@ -1,0 +1,17 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Dashboard{% endblock %}
+
+{% block conteudo %}
+<h2>Alterar senha</h2>
+
+<p>Olá, {{ user.username }}!</p> 
+<p><a href="{% url 'perfil' %}">Meu Perfil</a></p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Alterar senha">
+</form>
+
+{% endblock %}

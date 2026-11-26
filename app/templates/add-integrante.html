@@ -1,0 +1,25 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Equipe{% endblock %}
+
+{% block conteudo %}
+
+<form method="POST" action="{% url 'addIntegrante' %}">
+{% csrf_token %}
+
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" id="nome" required><br>
+
+    <label for="cargo">Descrição:</label>
+    <input type="text" name="cargo" id="cargo" required><br>
+
+    <label for="biografia">Biografia:</label>
+    <textarea  name="biografia" id="biografia" required></textarea><br>
+
+    <label for="foto">Foto(url):</label>
+    <input type="url" name="url" id="foto" required><br>
+
+    <button type="submit">Cadastrar</button>
+
+</form>
+{% endblock %}

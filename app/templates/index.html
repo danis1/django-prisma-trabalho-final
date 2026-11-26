@@ -1,0 +1,16 @@
+{% extends 'template.html' %}
+
+{% block titulo %}Home{%endblock%}
+
+{% block conteudo %}
+
+<section class="home-hero">
+    <span class="etiqueta">Gráfica online</span>
+    <h2>Impressão que dá cor às suas ideias.</h2>
+    <p>Da identidade visual ao material impresso: criamos e produzimos peças gráficas e soluções web para a sua marca, em qualquer lugar do Brasil.</p>
+    <p>Na PRISMA você consulta nosso catálogo de serviços e produtos, faz seus pedidos online, acompanha suas compras na área do cliente e fala com a nossa equipe sempre que precisar.</p>
+    <a class="botao" href="{% url 'produtos' %}">Ver produtos</a>
+    <a class="botao" href="{% url 'addContato' %}">Fale conosco</a>
+</section>
+
+{% endblock %}
